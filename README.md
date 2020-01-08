@@ -9,6 +9,8 @@ Before discovering the super-power of Tf.data.Dataset (https://mdw771.github.io/
 Horovod_DataSplit is a basic example based on publicly available Dataset.
 
 ## Running the code
-The code is expecting to work with hdf5 dataset. I used the "Task01_Brain_Tumour.tar" available here:
+The code is expecting an hdf5 dataset. I used the "Task01_Brain_Tumour.tar" available here:
 http://medicaldecathlon.com/
+
+Hope it helps! :)
 
