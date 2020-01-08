@@ -3,8 +3,7 @@ import h5py
 import os
 import random
 
-
-hdf5_filename = "../../Task01_BrainTumour.h5"
+hdf5_filename = "../../Task01_BrainTumour.h5"      # Dataset is publicly available: please check Readme
 
 def get_range(mpi_np=2,num_imgs=0):
    # Goal: return the num. of images required to have an even distribution across the mpi_np procs.
@@ -42,7 +41,7 @@ def get_indexes(mpi_np=2, valid_range=0):
    return INDEXES
 
 
-############### READING FILE #################
+########### FILE ACCESS #############
 DIM={}
 with h5py.File(hdf5_filename, 'r') as f:
    for k in f.keys():
@@ -52,18 +51,21 @@ with h5py.File(hdf5_filename, 'r') as f:
 
 
 
-############## TEST (main) ###################
-mpi_np = 4 		# Setting an example of 4 mpi processes
 
-imgs = int(DIM["imgs_train"] )	
-imgXproc = get_range(mpi_np, imgs)
+def main():
+   """Easy test to run"""
 
-print("Expected ",imgXproc, " img per proc.")
-IDX = get_indexes(mpi_np, imgXproc)
+   mpi_np = 4 		# Setting an example of 4 mpi processes
 
-for i in IDX:
-   print("Unique img indexes for HVD proc.", i, " = ", len(IDX[i]))
+   imgs = int(DIM["imgs_train"] )	
+   imgXproc = get_range(mpi_np, imgs)
 
+   print("Expected ",imgXproc, " img per proc.")
+   IDX = get_indexes(mpi_np, imgXproc)
 
-exit()
+   for i in IDX:
+      print("Unique img indexes for HVD proc.", i, " = ", len(IDX[i]))
+
+if __name__ == "__main__":
+   main()
 
